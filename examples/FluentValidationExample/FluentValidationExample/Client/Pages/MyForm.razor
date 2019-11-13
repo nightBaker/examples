@@ -1,0 +1,43 @@
+﻿@using FluentValidationExample.Shared
+@page "/myform"
+
+
+
+<EditForm Model="@FormModel" OnValidSubmit="@HandleValidSubmit">
+    <FluentValidation.FluentValidator></FluentValidation.FluentValidator>
+
+    <ValidationSummary />
+
+    <div class="form-group">
+        <InputText id="firstName" @bind-Value="FormModel.FirstName" />
+        <ValidationMessage For="() => FormModel.FirstName"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <InputText id="lastName" @bind-Value="FormModel.LastName" />
+        <ValidationMessage For="() => FormModel.LastName"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <InputText id="email" @bind-Value="FormModel.Email" />
+        <ValidationMessage For="() => FormModel.Email"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <InputText id="address" @bind-Value="FormModel.Address" />
+        <ValidationMessage For="() => FormModel.Address"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <InputNumber id="age" @bind-Value="FormModel.Age" />
+        <ValidationMessage For="() => FormModel.Age"></ValidationMessage>
+    </div>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+@code {
+    private MyFormModel FormModel { get; set; } = new MyFormModel();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+}
