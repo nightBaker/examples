@@ -1,0 +1,21 @@
+﻿@page "/counter"
+@using RazorClassLibrary
+
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    private void IncrementCount()
+    {
+        ExampleJsInterop.Prompt(JSRuntime, "Hello");
+    }
+}

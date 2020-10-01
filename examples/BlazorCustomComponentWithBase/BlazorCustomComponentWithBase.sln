@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCustomComponentWithBase", "BlazorCustomComponentWithBase\BlazorCustomComponentWithBase.csproj", "{7129908F-03E7-4C1A-9385-41EFD63B1388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorClassLibrary", "RazorClassLibrary\RazorClassLibrary.csproj", "{8098529D-313F-4F36-BABE-1E288A2F6746}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7129908F-03E7-4C1A-9385-41EFD63B1388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7129908F-03E7-4C1A-9385-41EFD63B1388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7129908F-03E7-4C1A-9385-41EFD63B1388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7129908F-03E7-4C1A-9385-41EFD63B1388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8098529D-313F-4F36-BABE-1E288A2F6746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8098529D-313F-4F36-BABE-1E288A2F6746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8098529D-313F-4F36-BABE-1E288A2F6746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8098529D-313F-4F36-BABE-1E288A2F6746}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45FF3764-8CFA-4867-92D0-9B138A784525}
+	EndGlobalSection
+EndGlobal
