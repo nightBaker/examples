@@ -1,8 +1,6 @@
-using BlazorState;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +8,8 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 
-namespace TestPrerender.Server
+namespace BlazorPersistedState.Server
 {
     public class Startup
     {
@@ -28,8 +25,9 @@ namespace TestPrerender.Server
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddRazorPages();
             services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddScoped<HttpClient>(s =>
             {
                 var navigationManager = s.GetRequiredService<NavigationManager>();
@@ -38,15 +36,6 @@ namespace TestPrerender.Server
                     BaseAddress = new Uri(navigationManager.BaseUri)
                 };
             });
-
-            services.AddBlazorState(
-               (aOptions) =>
-
-                   aOptions.Assemblies =
-                   new Assembly[]
-                   {
-                    typeof(TestPrerender.Client.Program).GetTypeInfo().Assembly,
-                   });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,12 +49,8 @@ namespace TestPrerender.Server
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-                app.UseHttpsRedirection();
             }
 
-            
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
@@ -75,7 +60,7 @@ namespace TestPrerender.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
-                endpoints.MapFallbackToPage("/Host");
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

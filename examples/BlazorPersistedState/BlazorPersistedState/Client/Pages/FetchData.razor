@@ -1,8 +1,8 @@
 ﻿@page "/fetchdata"
-@using TestPrerender.Shared
+@using BlazorPersistedState.Shared
 @inject HttpClient Http
-@using BlazorState
-@inherits BlazorStateComponent
+@implements IDisposable
+@inject ComponentApplicationState ApplicationState
 
 <h1>Weather forecast</h1>
 
@@ -38,14 +38,31 @@ else
 }
 
 @code {
-    private WeatherForecastState state => GetState<WeatherForecastState>();
-    private WeatherForecast[] forecasts => state.Forecasts.ToArray();
+    private WeatherForecast[] forecasts;
 
-    protected override async Task OnInitializedAsync()
+     protected override async Task OnInitializedAsync()
     {
-
-
-        await Mediator.Send(new WeatherForecastState.LoadForecasts());
+        ApplicationState.OnPersisting += PersistForecasts;
+        if (!ApplicationState.TryTakeAsJson<WeatherForecast[]>("fetchdata", out var data))
+        {
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        }
+        else
+        {            
+            forecasts = data;
+        }
     }
+
+    private Task PersistForecasts()
+    {
+        ApplicationState.PersistAsJson("fetchdata", forecasts);
+        return Task.CompletedTask;
+    }
+
+    void IDisposable.Dispose()
+    {
+        ApplicationState.OnPersisting -= PersistForecasts;
+    }
+
 
 }

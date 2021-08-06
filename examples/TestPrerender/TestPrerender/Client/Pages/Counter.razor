@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@using BlazorState
+@inherits BlazorStateComponent
 
 <h1>Counter</h1>
 
@@ -6,24 +8,22 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code { 
+@code {
 
 
 
-    private int currentCount = 0;
+    private int currentCount => CounterState.Count;
 
     private void IncrementCount()
     {
-        currentCount++;
+        
     }
+
+    CounterState CounterState => GetState<CounterState>();
 
     protected override async Task OnInitializedAsync()
     {
-
-        await Task.Delay(1000 * 5);
-
-        currentCount = 5;
-
+                        
         await base.OnInitializedAsync();
     }
 }
